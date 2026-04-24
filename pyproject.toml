@@ -1,0 +1,35 @@
+[project]
+name = "computational-camp"
+version = "0.1.0"
+description = "12-week summer computational camp for incoming Rice computational economics MA students"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ipykernel>=6.29",
+    "jupyter>=1.1",
+    "jupyterlab>=4.2",
+    "matplotlib>=3.9",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3",
+    "ruff>=0.8",
+]
+
+[tool.ruff]
+line-length = 100
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+ignore = ["E501"]
+
+# Notebook cells legitimately redefine names as a topic progresses, and
+# bare `except Exception as e:` blocks are common for pedagogical error
+# demos. Relax those rules for lecture and homework notebooks.
+[tool.ruff.lint.per-file-ignores]
+"**/*.ipynb" = ["F811", "F841", "F821", "E402", "B006", "B007", "B033", "B905", "I001"]
+
+[tool.ruff.format]
+docstring-code-format = true
